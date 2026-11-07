@@ -1,0 +1,1 @@
+{"name":"raax-api-inventory","version":"2.0.0","scripts":{"start":"node server.js"}}
