@@ -1,6 +1,22 @@
 services:
   raax-api-inventory:
     build: .
-    ports:
-      - "8080:8080"
+    image: raax-api-inventory:local
+    init: true
     restart: unless-stopped
+    ports:
+      # loopback only; put a TLS reverse proxy in front to expose it (HTTP Basic credentials are otherwise sent in clear text)
+      - "127.0.0.1:8080:8080"
+    environment:
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD to 12 or more characters in .env}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-}
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 100
+    mem_limit: 256m
+    cpus: 0.5

@@ -1,1 +1,13 @@
-{"name":"raax-api-inventory","version":"2.0.0","scripts":{"start":"node server.js"}}
+{
+  "name": "raax-api-inventory",
+  "version": "2.1.0",
+  "private": true,
+  "description": "API inventory and review tool (static frontend + hardened Node server)",
+  "main": "server.js",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {}
+}
